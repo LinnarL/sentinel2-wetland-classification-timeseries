@@ -1,3 +1,9 @@
+## What does this project do?
+This project was an exploration of new libraries and data processing techniques for me during an internship at Geosyntec Consultants, intended to show an example of what can be done with cloud processing and parallelization in handling remote sensing data. The basic idea is: 
+- Get cloud-filtered satellite imagery from the summer seasons of a number of years, say 2018, 2019, 2020 and 2021.
+- Train a regression model to predict wetland extents, based on Naturvårdsverkets own wetland inventory data (see https://www.naturvardsverket.se/publikationer/7100/978-91-620-7127-1/) and our downloaded 2018 satellite imagery as explanatory variable.
+- Evaluate performance of the model on a subset of the 2018 data (80/20 training/validation split)
+- Apply model across subsequent years satellite imagery to predict change in wetlands distribution over time!
 
 ## Prerequisites
 
@@ -172,6 +178,10 @@ The study area is defined by a GeoJSON file located at `working_dir/study_area/A
 - Supports parallel processing using Dask
 - Cloud-based processing available through Coiled
 - Configurable chunk sizes, make sure to change this if using longer time series, higher/lower spatial resolution. A good chunksize is likely around 100MB, see Dask documentation.
+
+### Future opportunities
+- Implement a regression model based on Dask and XGBoost instead of Scikit-Learn, to be able to train on substantially more data in a parallelized way.
+- Move from median of many images (compute inefficient) to instead use the first non-cloudy pixel among the stack of available pixels.
 
 ## Troubleshooting
 
